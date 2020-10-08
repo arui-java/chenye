@@ -7,6 +7,7 @@ import com.itheima.health.entity.QueryPageBean;
 import com.itheima.health.entity.Result;
 import com.itheima.health.pojo.CheckItem;
 import com.itheima.health.service.CheckItemService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class CheckItemController {
 
     //新增   接收前端提交过来的formData
     @PostMapping("/add")
+    @PreAuthorize("hasAnyAuthority('CHECKITEM_ADD')")
     public Result add(@RequestBody CheckItem checkItem){
         //调用服务添加
         checkItemService.add(checkItem);

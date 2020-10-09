@@ -93,7 +93,7 @@
     </select>
 
     <!--1对多关系：套餐包含检查组，检查组包含检查项-->
-    <resultMap id="setmealDetailMap" type="setmeal">
+    <resultMap id="setmealDetailMap" type="com.itheima.health.pojo.Setmeal">
         <id property="id" column="id"/>
         <result property="name" column="name" />
         <result property="code" column="code" />
@@ -104,11 +104,11 @@
         <result property="remark" column="remark" />
         <result property="attention" column="attention" />
         <result property="img" column="img" />
-        <collection property="checkGroups" ofType="CheckGroup">
+        <collection property="checkGroups" ofType="com.itheima.health.pojo.CheckGroup">
             <id property="id" column="checkgroup_id"/>
             <result property="name" column="checkgroup_name"/>
             <result property="remark" column="checkgroup_remark"/>
-            <collection property="checkItems" ofType="CheckItem">
+            <collection property="checkItems" ofType="com.itheima.health.pojo.CheckItem">
                 <id property="id" column="checkitem_id"/>
                 <result property="name" column="checkitem_name"/>
             </collection>
@@ -135,4 +135,12 @@
                     select="com.itheima.health.dao.CheckGroupDao.findCheckGroupListById">
         </collection>
     </resultMap>-->
+
+    <!--套餐预约占比-->
+    <select id="getSetmealReport" resultType="java.util.Map">
+        select s.name,t.value from t_setmeal s, (
+    select setmeal_id,count(1) value from t_order group by setmeal_id
+) t where s.id=t.setmeal_id
+    </select>
+
 </mapper>

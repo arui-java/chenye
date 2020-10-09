@@ -5,6 +5,7 @@ import com.itheima.health.pojo.Setmeal;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: zengrui
@@ -48,4 +49,8 @@ public interface SetmealDao {
      Setmeal findDetailById(int id);
     //方式二
     //Setmeal findDetailById2(int id);
+
+    //套餐预约占比
+    List<Map<String, Object>> getSetmealReport();
+
 }
